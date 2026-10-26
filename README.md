@@ -13,15 +13,14 @@
 
 | 기능 | API | 발생 SQL 쿼리 예시 |
 |---|---|---|
-| 데이터베이스 생성 | - | `CREATE DATABASE student_db;` |
-| 강의 생성 | `POST /courses` | `INSERT INTO course (course_name, professor) VALUES ("데이터베이스", "김석환");` |
-| 강의 전체 조회 | `GET /courses` | `SELECT * FROM course;` |
-| 학생 생성 | `POST /students` | `INSERT INTO student (name, major, course_id) VALUES ("안정민", "소프트융합학과", 1);` |
-| 학생 단건 조회 | `GET /students/1` | `SELECT * FROM student WHERE id = 1;` |
-| 학생 전체 조회 | `GET /students` | `SELECT * FROM student;` |
-| 학생 수정 | `PATCH /students/1` | `UPDATE student SET name = "이길수", major = "소프트웨어융합학과", course_id = 1 WHERE id = 1;` |
-| 학생 삭제 | `DELETE /students/1` | `DELETE FROM student WHERE id = 1;` |
-| 강의 삭제 | `DELETE /courses/1` | `DELETE FROM course WHERE id = 1;` |
+| 강의 생성 | `POST /courses` | `INSERT INTO courses (course_name, professor) VALUES ("데이터베이스", "김석환");` |
+| 강의 전체 조회 | `GET /courses` | `SELECT * FROM courses;` |
+| 학생 생성 | `POST /students` | `INSERT INTO students (name, major, course_id) VALUES ("안정민", "소프트융합학과", 1);` |
+| 학생 단건 조회 | `GET /students/1` | `SELECT * FROM students WHERE id = 1;` |
+| 학생 전체 조회 | `GET /students` | `SELECT * FROM students;` |
+| 학생 수정 | `PATCH /students/1` | `UPDATE students SET name = "이길수", major = "소프트융합학과", course_id = 1 WHERE id = 1;` |
+| 학생 삭제 | `DELETE /students/1` | `DELETE FROM students WHERE id = 1;` |
+| 강의 삭제 | `DELETE /courses/1` | `DELETE FROM courses WHERE id = 1;` |
 
 ---
 
