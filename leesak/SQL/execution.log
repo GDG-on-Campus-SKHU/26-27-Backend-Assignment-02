@@ -1,0 +1,466 @@
+2026-11-01T23:48:38.331+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/genres", parameters={}
+2026-11-01T23:48:38.364+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-3] org.hibernate.SQL                        :
+    insert
+    into
+        genres
+        (name, id)
+    values
+        (?, default)
+2026-11-01T23:48:38.365+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [문학]
+2026-11-01T23:48:38.376+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 201 CREATED
+2026-11-01T23:48:38.395+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : POST "/genres", parameters={}
+2026-11-01T23:48:38.396+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-4] org.hibernate.SQL                        :
+    insert
+    into
+        genres
+        (name, id)
+    values
+        (?, default)
+2026-11-01T23:48:38.396+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [기술]
+2026-11-01T23:48:38.397+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 201 CREATED
+2026-11-01T23:48:38.409+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/genres", parameters={}
+2026-11-01T23:48:38.410+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-5] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title,
+        g1_0.name
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    order by
+        g1_0.id,
+        b1_0.id
+2026-11-01T23:48:38.413+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-11-01T23:48:38.423+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : GET "/genres/1", parameters={}
+2026-11-01T23:48:38.428+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-6] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-01T23:48:38.429+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-01T23:48:38.430+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-11-01T23:48:38.442+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : PATCH "/genres/1", parameters={}
+2026-11-01T23:48:38.444+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-7] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-01T23:48:38.444+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-7] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-01T23:48:38.446+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-7] org.hibernate.SQL                        :
+    update
+        genres
+    set
+        name=?
+    where
+        id=?
+2026-11-01T23:48:38.447+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-7] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [한국 문학]
+2026-11-01T23:48:38.447+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-7] org.hibernate.orm.jdbc.bind              : binding parameter (2:BIGINT) <- [1]
+2026-11-01T23:48:38.448+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-11-01T23:48:38.463+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : POST "/books", parameters={}
+2026-11-01T23:48:38.471+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-8] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-01T23:48:38.472+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-01T23:48:38.473+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-8] org.hibernate.SQL                        :
+    insert
+    into
+        books
+        (author, genre_id, title, id)
+    values
+        (?, ?, ?, default)
+2026-11-01T23:48:38.474+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [한강]
+2026-11-01T23:48:38.474+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (2:BIGINT) <- [1]
+2026-11-01T23:48:38.474+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [소년이 온다]
+2026-11-01T23:48:38.479+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 201 CREATED
+2026-11-01T23:48:38.492+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/books", parameters={}
+2026-11-01T23:48:38.496+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-9] org.hibernate.SQL                        :
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.genre_id,
+        g1_0.id,
+        g1_0.name,
+        b1_0.title
+    from
+        books b1_0
+    join
+        genres g1_0
+            on g1_0.id=b1_0.genre_id
+    order by
+        b1_0.id
+2026-11-01T23:48:38.502+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-11-01T23:48:38.517+09:00 DEBUG 22128 --- [books-genres-api] [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/books/1", parameters={}
+2026-11-01T23:48:38.519+09:00 DEBUG 22128 --- [books-genres-api] [io-8080-exec-10] org.hibernate.SQL                        :
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.genre_id,
+        g1_0.id,
+        g1_0.name,
+        b1_0.title
+    from
+        books b1_0
+    join
+        genres g1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        b1_0.id=?
+2026-11-01T23:48:38.519+09:00 TRACE 22128 --- [books-genres-api] [io-8080-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-01T23:48:38.520+09:00 DEBUG 22128 --- [books-genres-api] [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-11-01T23:48:38.535+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/genres/1", parameters={}
+2026-11-01T23:48:38.537+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-2] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-01T23:48:38.537+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-01T23:48:38.539+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-11-01T23:48:38.552+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : DELETE "/genres/1", parameters={}
+2026-11-01T23:48:38.553+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-1] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-01T23:48:38.553+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-01T23:48:38.580+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-1] org.hibernate.SQL                        :
+    select
+        b1_0.id
+    from
+        books b1_0
+    where
+        b1_0.genre_id=?
+    fetch
+        first ? rows only
+2026-11-01T23:48:38.580+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-01T23:48:38.580+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (2:INTEGER) <- [1]
+2026-11-01T23:48:38.589+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 409 CONFLICT
+2026-11-01T23:48:38.603+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/books", parameters={}
+2026-11-01T23:48:38.604+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 400 BAD_REQUEST
+2026-11-01T23:48:38.615+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/books", parameters={}
+2026-11-01T23:48:38.617+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-5] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-01T23:48:38.617+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-5] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [9223372036854775806]
+2026-11-01T23:48:38.618+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-11-01T23:48:38.628+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : POST "/genres", parameters={}
+2026-11-01T23:48:38.629+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 400 BAD_REQUEST
+2026-11-01T23:48:38.640+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/books/9223372036854775806", parameters={}
+2026-11-01T23:48:38.642+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-8] org.hibernate.SQL                        :
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.genre_id,
+        g1_0.id,
+        g1_0.name,
+        b1_0.title
+    from
+        books b1_0
+    join
+        genres g1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        b1_0.id=?
+2026-11-01T23:48:38.642+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [9223372036854775806]
+2026-11-01T23:48:38.643+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-11-01T23:48:38.653+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : PATCH "/books/1", parameters={}
+2026-11-01T23:48:38.654+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-9] org.hibernate.SQL                        :
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.genre_id,
+        g1_0.id,
+        g1_0.name,
+        b1_0.title
+    from
+        books b1_0
+    join
+        genres g1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        b1_0.id=?
+2026-11-01T23:48:38.655+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-9] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-01T23:48:38.656+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-9] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-01T23:48:38.656+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-9] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [2]
+2026-11-01T23:48:38.657+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-9] org.hibernate.SQL                        :
+    select
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        books b1_0
+    where
+        b1_0.genre_id=?
+    order by
+        b1_0.id
+2026-11-01T23:48:38.657+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-9] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-01T23:48:38.659+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-9] org.hibernate.SQL                        :
+    update
+        books
+    set
+        author=?,
+        genre_id=?,
+        title=?
+    where
+        id=?
+2026-11-01T23:48:38.659+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-9] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [한강]
+2026-11-01T23:48:38.659+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-9] org.hibernate.orm.jdbc.bind              : binding parameter (2:BIGINT) <- [2]
+2026-11-01T23:48:38.660+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-9] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [채식주의자]
+2026-11-01T23:48:38.660+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-9] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [1]
+2026-11-01T23:48:38.660+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-11-01T23:48:38.671+09:00 DEBUG 22128 --- [books-genres-api] [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/genres/1", parameters={}
+2026-11-01T23:48:38.673+09:00 DEBUG 22128 --- [books-genres-api] [io-8080-exec-10] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-01T23:48:38.673+09:00 TRACE 22128 --- [books-genres-api] [io-8080-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-01T23:48:38.674+09:00 DEBUG 22128 --- [books-genres-api] [io-8080-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-11-01T23:48:38.684+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : DELETE "/books/1", parameters={}
+2026-11-01T23:48:38.686+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-2] org.hibernate.SQL                        :
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.genre_id,
+        g1_0.id,
+        g1_0.name,
+        b1_0.title
+    from
+        books b1_0
+    join
+        genres g1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        b1_0.id=?
+2026-11-01T23:48:38.686+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-01T23:48:38.689+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-2] org.hibernate.SQL                        :
+    delete
+    from
+        books
+    where
+        id=?
+2026-11-01T23:48:38.689+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-01T23:48:38.690+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 204 NO_CONTENT
+2026-11-01T23:48:38.701+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : GET "/books/1", parameters={}
+2026-11-01T23:48:38.702+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-1] org.hibernate.SQL                        :
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.genre_id,
+        g1_0.id,
+        g1_0.name,
+        b1_0.title
+    from
+        books b1_0
+    join
+        genres g1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        b1_0.id=?
+2026-11-01T23:48:38.703+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-01T23:48:38.703+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-11-01T23:48:38.712+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : DELETE "/genres/1", parameters={}
+2026-11-01T23:48:38.714+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-3] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-01T23:48:38.714+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-01T23:48:38.715+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-3] org.hibernate.SQL                        :
+    select
+        b1_0.id
+    from
+        books b1_0
+    where
+        b1_0.genre_id=?
+    fetch
+        first ? rows only
+2026-11-01T23:48:38.715+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-01T23:48:38.715+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (2:INTEGER) <- [1]
+2026-11-01T23:48:38.716+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-3] org.hibernate.SQL                        :
+    delete
+    from
+        genres
+    where
+        id=?
+2026-11-01T23:48:38.716+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-01T23:48:38.717+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 204 NO_CONTENT
+2026-11-01T23:48:38.727+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : DELETE "/genres/2", parameters={}
+2026-11-01T23:48:38.728+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-4] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-01T23:48:38.728+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [2]
+2026-11-01T23:48:38.729+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-4] org.hibernate.SQL                        :
+    select
+        b1_0.id
+    from
+        books b1_0
+    where
+        b1_0.genre_id=?
+    fetch
+        first ? rows only
+2026-11-01T23:48:38.729+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [2]
+2026-11-01T23:48:38.729+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (2:INTEGER) <- [1]
+2026-11-01T23:48:38.729+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-4] org.hibernate.SQL                        :
+    delete
+    from
+        genres
+    where
+        id=?
+2026-11-01T23:48:38.729+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [2]
+2026-11-01T23:48:38.730+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 204 NO_CONTENT
+2026-11-01T23:48:38.740+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/genres/1", parameters={}
+2026-11-01T23:48:38.741+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-5] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-01T23:48:38.741+09:00 TRACE 22128 --- [books-genres-api] [nio-8080-exec-5] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-01T23:48:38.742+09:00 DEBUG 22128 --- [books-genres-api] [nio-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
