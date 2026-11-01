@@ -1,0 +1,53 @@
+package com.example.jpaexample.domain;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "tracks")
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Track {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private Double gainDb;
+    private Boolean muted;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id", nullable = false)
+    private Project project;
+
+    @Builder
+    public Track(Project project) {
+        this.project = project;
+        this.name = "track";
+        this.gainDb = 0.0;
+        this.muted = false;
+    }
+
+    public void update(String name, Double gainDb, Boolean muted) {
+        if (name != null) {
+            this.name = name;
+        }
+        if (gainDb != null) {
+            this.gainDb = gainDb;
+        }
+        if (muted != null) {
+            this.muted = muted;
+        }
+    }
+}
