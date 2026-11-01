@@ -22,7 +22,6 @@ public class BookService {
 
     @Transactional
     public BookInfoResponseDto saveBook(BookSaveRequestDto bookSaveRequestDto) {
-        // 먼저 책을 쓴 작가가 있는지 찾아봄
         Author author = authorRepository.findById(bookSaveRequestDto.authorId())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 작가입니다."));
 
