@@ -4,6 +4,7 @@ import com.gdg.gdg_be_assignment02.domain.User;
 import com.gdg.gdg_be_assignment02.dto.UserGetResponseDto;
 import com.gdg.gdg_be_assignment02.dto.UserInfoResponseDto;
 import com.gdg.gdg_be_assignment02.dto.UserSaveRequestDto;
+import com.gdg.gdg_be_assignment02.dto.UserUpdateRequestDto;
 import com.gdg.gdg_be_assignment02.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,17 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("요청하신 유저 정보를 찾을 수 없습니다."));
 
         return UserGetResponseDto.from(user);
+    }
+
+    // updateUser
+    @Transactional
+    public UserInfoResponseDto updateUser(Long userId, UserUpdateRequestDto userUpdateRequestDto) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException(("요청하신 유저 정보를 찾을 수 없습니다.")));
+
+        user.update(userUpdateRequestDto.name(), userUpdateRequestDto.age());
+
+        return UserInfoResponseDto.from(user);
     }
 
     // deleteUser

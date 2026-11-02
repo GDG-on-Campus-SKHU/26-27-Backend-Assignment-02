@@ -45,8 +45,14 @@ public class Movie {
     }
 
     public void update(String title, String director, LocalDate releaseDate) {
-        this.title = title;
-        this.director = director;
-        this.releaseDate = releaseDate;
+        if (title != null) {
+            this.title = title;
+        }
+        if (director != null) {
+            this.director = director;
+        }
+        if (releaseDate != null) {
+            this.releaseDate = releaseDate;
+        }
     }
 }
