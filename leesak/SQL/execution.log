@@ -1,0 +1,466 @@
+2026-11-02T13:09:38.560+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/genres", parameters={}
+2026-11-02T13:09:38.628+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-1] org.hibernate.SQL                        :
+    insert
+    into
+        genres
+        (name, id)
+    values
+        (?, default)
+2026-11-02T13:09:38.630+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [문학]
+2026-11-02T13:09:38.676+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 201 CREATED
+2026-11-02T13:09:38.695+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/genres", parameters={}
+2026-11-02T13:09:38.696+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-3] org.hibernate.SQL                        :
+    insert
+    into
+        genres
+        (name, id)
+    values
+        (?, default)
+2026-11-02T13:09:38.696+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [기술]
+2026-11-02T13:09:38.698+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 201 CREATED
+2026-11-02T13:09:38.710+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/genres", parameters={}
+2026-11-02T13:09:38.739+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-4] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title,
+        g1_0.name
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    order by
+        g1_0.id,
+        b1_0.id
+2026-11-02T13:09:38.747+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-11-02T13:09:38.760+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/genres/1", parameters={}
+2026-11-02T13:09:38.765+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-5] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-02T13:09:38.765+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-5] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-02T13:09:38.766+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-11-02T13:09:38.778+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-6] o.s.web.servlet.DispatcherServlet        : PATCH "/genres/1", parameters={}
+2026-11-02T13:09:38.780+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-6] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-02T13:09:38.780+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-02T13:09:38.782+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-6] org.hibernate.SQL                        :
+    update
+        genres
+    set
+        name=?
+    where
+        id=?
+2026-11-02T13:09:38.783+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [한국 문학]
+2026-11-02T13:09:38.783+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-6] org.hibernate.orm.jdbc.bind              : binding parameter (2:BIGINT) <- [1]
+2026-11-02T13:09:38.785+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-11-02T13:09:38.795+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-7] o.s.web.servlet.DispatcherServlet        : POST "/books", parameters={}
+2026-11-02T13:09:38.800+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-7] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-02T13:09:38.800+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-7] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-02T13:09:38.801+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-7] org.hibernate.SQL                        :
+    insert
+    into
+        books
+        (author, genre_id, title, id)
+    values
+        (?, ?, ?, default)
+2026-11-02T13:09:38.802+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-7] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [한강]
+2026-11-02T13:09:38.802+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-7] org.hibernate.orm.jdbc.bind              : binding parameter (2:BIGINT) <- [1]
+2026-11-02T13:09:38.802+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-7] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [소년이 온다]
+2026-11-02T13:09:38.804+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 201 CREATED
+2026-11-02T13:09:38.815+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/books", parameters={}
+2026-11-02T13:09:38.820+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-8] org.hibernate.SQL                        :
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.genre_id,
+        g1_0.id,
+        g1_0.name,
+        b1_0.title
+    from
+        books b1_0
+    join
+        genres g1_0
+            on g1_0.id=b1_0.genre_id
+    order by
+        b1_0.id
+2026-11-02T13:09:38.822+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-11-02T13:09:38.833+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/books/1", parameters={}
+2026-11-02T13:09:38.835+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-9] org.hibernate.SQL                        :
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.genre_id,
+        g1_0.id,
+        g1_0.name,
+        b1_0.title
+    from
+        books b1_0
+    join
+        genres g1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        b1_0.id=?
+2026-11-02T13:09:38.836+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-9] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-02T13:09:38.837+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-11-02T13:09:38.848+09:00 DEBUG 33484 --- [submission-validation] [o-18082-exec-10] o.s.web.servlet.DispatcherServlet        : GET "/genres/1", parameters={}
+2026-11-02T13:09:38.849+09:00 DEBUG 33484 --- [submission-validation] [o-18082-exec-10] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-02T13:09:38.850+09:00 TRACE 33484 --- [submission-validation] [o-18082-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-02T13:09:38.851+09:00 DEBUG 33484 --- [submission-validation] [o-18082-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-11-02T13:09:38.862+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-2] o.s.web.servlet.DispatcherServlet        : DELETE "/genres/1", parameters={}
+2026-11-02T13:09:38.863+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-2] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-02T13:09:38.863+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-02T13:09:38.887+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-2] org.hibernate.SQL                        :
+    select
+        b1_0.id
+    from
+        books b1_0
+    where
+        b1_0.genre_id=?
+    fetch
+        first ? rows only
+2026-11-02T13:09:38.888+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-02T13:09:38.888+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (2:INTEGER) <- [1]
+2026-11-02T13:09:38.901+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 409 CONFLICT
+2026-11-02T13:09:38.912+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/books", parameters={}
+2026-11-02T13:09:38.913+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 400 BAD_REQUEST
+2026-11-02T13:09:38.924+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-3] o.s.web.servlet.DispatcherServlet        : POST "/books", parameters={}
+2026-11-02T13:09:38.925+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-3] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-02T13:09:38.926+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [9223372036854775806]
+2026-11-02T13:09:38.927+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-11-02T13:09:38.937+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-5] o.s.web.servlet.DispatcherServlet        : POST "/genres", parameters={}
+2026-11-02T13:09:38.938+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 400 BAD_REQUEST
+2026-11-02T13:09:38.948+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/books/9223372036854775806", parameters={}
+2026-11-02T13:09:38.949+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-7] org.hibernate.SQL                        :
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.genre_id,
+        g1_0.id,
+        g1_0.name,
+        b1_0.title
+    from
+        books b1_0
+    join
+        genres g1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        b1_0.id=?
+2026-11-02T13:09:38.950+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-7] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [9223372036854775806]
+2026-11-02T13:09:38.951+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-11-02T13:09:38.962+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-8] o.s.web.servlet.DispatcherServlet        : PATCH "/books/1", parameters={}
+2026-11-02T13:09:38.963+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-8] org.hibernate.SQL                        :
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.genre_id,
+        g1_0.id,
+        g1_0.name,
+        b1_0.title
+    from
+        books b1_0
+    join
+        genres g1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        b1_0.id=?
+2026-11-02T13:09:38.964+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-02T13:09:38.965+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-8] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-02T13:09:38.965+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [2]
+2026-11-02T13:09:38.966+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-8] org.hibernate.SQL                        :
+    select
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        books b1_0
+    where
+        b1_0.genre_id=?
+    order by
+        b1_0.id
+2026-11-02T13:09:38.966+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-02T13:09:38.968+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-8] org.hibernate.SQL                        :
+    update
+        books
+    set
+        author=?,
+        genre_id=?,
+        title=?
+    where
+        id=?
+2026-11-02T13:09:38.968+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (1:VARCHAR) <- [한강]
+2026-11-02T13:09:38.968+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (2:BIGINT) <- [2]
+2026-11-02T13:09:38.968+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (3:VARCHAR) <- [채식주의자]
+2026-11-02T13:09:38.968+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-8] org.hibernate.orm.jdbc.bind              : binding parameter (4:BIGINT) <- [1]
+2026-11-02T13:09:38.969+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-11-02T13:09:38.980+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/genres/1", parameters={}
+2026-11-02T13:09:38.981+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-9] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-02T13:09:38.981+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-9] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-02T13:09:38.982+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2026-11-02T13:09:38.993+09:00 DEBUG 33484 --- [submission-validation] [o-18082-exec-10] o.s.web.servlet.DispatcherServlet        : DELETE "/books/1", parameters={}
+2026-11-02T13:09:38.994+09:00 DEBUG 33484 --- [submission-validation] [o-18082-exec-10] org.hibernate.SQL                        :
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.genre_id,
+        g1_0.id,
+        g1_0.name,
+        b1_0.title
+    from
+        books b1_0
+    join
+        genres g1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        b1_0.id=?
+2026-11-02T13:09:38.994+09:00 TRACE 33484 --- [submission-validation] [o-18082-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-02T13:09:38.997+09:00 DEBUG 33484 --- [submission-validation] [o-18082-exec-10] org.hibernate.SQL                        :
+    delete
+    from
+        books
+    where
+        id=?
+2026-11-02T13:09:38.997+09:00 TRACE 33484 --- [submission-validation] [o-18082-exec-10] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-02T13:09:38.998+09:00 DEBUG 33484 --- [submission-validation] [o-18082-exec-10] o.s.web.servlet.DispatcherServlet        : Completed 204 NO_CONTENT
+2026-11-02T13:09:39.009+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/books/1", parameters={}
+2026-11-02T13:09:39.010+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-2] org.hibernate.SQL                        :
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.genre_id,
+        g1_0.id,
+        g1_0.name,
+        b1_0.title
+    from
+        books b1_0
+    join
+        genres g1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        b1_0.id=?
+2026-11-02T13:09:39.010+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-2] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-02T13:09:39.011+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
+2026-11-02T13:09:39.022+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-1] o.s.web.servlet.DispatcherServlet        : DELETE "/genres/1", parameters={}
+2026-11-02T13:09:39.023+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-1] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-02T13:09:39.023+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-02T13:09:39.024+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-1] org.hibernate.SQL                        :
+    select
+        b1_0.id
+    from
+        books b1_0
+    where
+        b1_0.genre_id=?
+    fetch
+        first ? rows only
+2026-11-02T13:09:39.024+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-02T13:09:39.024+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (2:INTEGER) <- [1]
+2026-11-02T13:09:39.025+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-1] org.hibernate.SQL                        :
+    delete
+    from
+        genres
+    where
+        id=?
+2026-11-02T13:09:39.025+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-1] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-02T13:09:39.026+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 204 NO_CONTENT
+2026-11-02T13:09:39.036+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-4] o.s.web.servlet.DispatcherServlet        : DELETE "/genres/2", parameters={}
+2026-11-02T13:09:39.038+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-4] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-02T13:09:39.038+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [2]
+2026-11-02T13:09:39.039+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-4] org.hibernate.SQL                        :
+    select
+        b1_0.id
+    from
+        books b1_0
+    where
+        b1_0.genre_id=?
+    fetch
+        first ? rows only
+2026-11-02T13:09:39.039+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [2]
+2026-11-02T13:09:39.039+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (2:INTEGER) <- [1]
+2026-11-02T13:09:39.039+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-4] org.hibernate.SQL                        :
+    delete
+    from
+        genres
+    where
+        id=?
+2026-11-02T13:09:39.039+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-4] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [2]
+2026-11-02T13:09:39.040+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 204 NO_CONTENT
+2026-11-02T13:09:39.050+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/genres/1", parameters={}
+2026-11-02T13:09:39.051+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-3] org.hibernate.SQL                        :
+    select
+        g1_0.id,
+        g1_0.name,
+        b1_0.genre_id,
+        b1_0.id,
+        b1_0.author,
+        b1_0.title
+    from
+        genres g1_0
+    left join
+        books b1_0
+            on g1_0.id=b1_0.genre_id
+    where
+        g1_0.id=?
+    order by
+        b1_0.id
+2026-11-02T13:09:39.051+09:00 TRACE 33484 --- [submission-validation] [io-18082-exec-3] org.hibernate.orm.jdbc.bind              : binding parameter (1:BIGINT) <- [1]
+2026-11-02T13:09:39.052+09:00 DEBUG 33484 --- [submission-validation] [io-18082-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 404 NOT_FOUND
