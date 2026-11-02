@@ -4,6 +4,7 @@ import com.gdg.gdg_be_assignment02.dto.UserGetResponseDto;
 import com.gdg.gdg_be_assignment02.dto.UserInfoResponseDto;
 import com.gdg.gdg_be_assignment02.dto.UserSaveRequestDto;
 import com.gdg.gdg_be_assignment02.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserInfoResponseDto> saveUser(@RequestBody UserSaveRequestDto userSaveRequestDto) {
+    public ResponseEntity<UserInfoResponseDto> saveUser(@Valid @RequestBody UserSaveRequestDto userSaveRequestDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.saveUser(userSaveRequestDto));
     }
 

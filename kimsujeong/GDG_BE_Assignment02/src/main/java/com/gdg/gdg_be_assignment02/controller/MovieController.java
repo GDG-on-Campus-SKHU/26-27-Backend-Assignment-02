@@ -3,6 +3,7 @@ package com.gdg.gdg_be_assignment02.controller;
 import com.gdg.gdg_be_assignment02.dto.MovieInfoResponseDto;
 import com.gdg.gdg_be_assignment02.dto.MovieSaveRequestDto;
 import com.gdg.gdg_be_assignment02.service.MovieService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,13 +26,13 @@ public class MovieController {
     private final MovieService movieService;
 
     @PostMapping("/{id}") // 경로 파라미터(id)로 전달받은 유저에 영화 정보 생성
-    public ResponseEntity<MovieInfoResponseDto> saveMovie(@PathVariable Long id,
+    public ResponseEntity<MovieInfoResponseDto> saveMovie(@Valid @PathVariable Long id,
                                                           @RequestBody MovieSaveRequestDto movieSaveRequestDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(movieService.saveMovie(id, movieSaveRequestDto));
     }
 
     @PatchMapping("/{movieId}")
-    public ResponseEntity<MovieInfoResponseDto> updateMovie(@PathVariable Long movieId,
+    public ResponseEntity<MovieInfoResponseDto> updateMovie(@Valid @PathVariable Long movieId,
                                                             @RequestBody MovieSaveRequestDto movieSaveRequestDto) {
         return ResponseEntity.status(HttpStatus.OK).body(movieService.updateMovie(movieId, movieSaveRequestDto));
     }
