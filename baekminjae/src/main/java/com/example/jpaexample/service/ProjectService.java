@@ -51,7 +51,7 @@ public class ProjectService {
     }
 
     @Transactional
-    public ProjectResponseDto setProject(Long projectId, ProjectRenameRequestDto request) {
+    public ProjectResponseDto renameProject(Long projectId, ProjectRenameRequestDto request) {
         Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "존재하지 않는 프로젝트입니다."));

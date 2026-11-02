@@ -44,11 +44,11 @@ public class ProjectController {
 
     // 특정 프로젝트 이름 바꾸기
     @PatchMapping("/{projectId}")
-    public ResponseEntity<ProjectResponseDto> setProject(
+    public ResponseEntity<ProjectResponseDto> renameProject(
             @PathVariable Long projectId,
             @RequestBody ProjectRenameRequestDto request
     ) {
-        return ResponseEntity.ok(projectService.setProject(projectId, request));
+        return ResponseEntity.ok(projectService.renameProject(projectId, request));
     }
 
     // 특정 프로젝트 삭제하기
