@@ -11,8 +11,8 @@ public record MovieInfoResponseDto(
         String title,
         String director,
         LocalDate releaseDate,
-        Long id, // userId
-        String name // userName
+        Long userId,
+        String userName
 ) {
     public static MovieInfoResponseDto from(Movie movie) {
         return MovieInfoResponseDto.builder()
@@ -20,8 +20,8 @@ public record MovieInfoResponseDto(
                 .title(movie.getTitle())
                 .director(movie.getDirector())
                 .releaseDate(movie.getReleaseDate())
-                .id(movie.getUser().getId())
-                .name(movie.getUser().getName())
+                .userId(movie.getUser().getId())
+                .userName(movie.getUser().getName())
                 .build();
     }
 }

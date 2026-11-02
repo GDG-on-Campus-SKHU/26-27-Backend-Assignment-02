@@ -25,10 +25,10 @@ public class MovieController {
 
     private final MovieService movieService;
 
-    @PostMapping("/{id}") // 경로 파라미터(id)로 전달받은 유저에 영화 정보 생성
-    public ResponseEntity<MovieInfoResponseDto> saveMovie(@Valid @PathVariable Long id,
+    @PostMapping("/{userId}") // 경로 파라미터(userId)로 전달받은 유저에 영화 정보 생성
+    public ResponseEntity<MovieInfoResponseDto> saveMovie(@Valid @PathVariable Long userId,
                                                           @Valid @RequestBody MovieSaveRequestDto movieSaveRequestDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(movieService.saveMovie(id, movieSaveRequestDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(movieService.saveMovie(userId, movieSaveRequestDto));
     }
 
     @PatchMapping("/{movieId}")
