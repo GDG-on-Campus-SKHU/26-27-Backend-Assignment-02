@@ -51,7 +51,10 @@ public class MovieService {
     // deleteMovie
     @Transactional
     public void deleteMovie(Long movieId) {
-        movieRepository.deleteById(movieId);
+        Movie movie = movieRepository.findById(movieId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 영화입니다."));
+
+        movieRepository.delete(movie);
     }
 
     // getAllMovie

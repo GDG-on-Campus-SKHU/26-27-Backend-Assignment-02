@@ -42,7 +42,10 @@ public class UserService {
     // deleteUser
     @Transactional
     public void deleteUser(Long userId) {
-        userRepository.deleteById(userId);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저입니다."));
+
+        userRepository.delete(user);
     }
 
     // getAllUser
