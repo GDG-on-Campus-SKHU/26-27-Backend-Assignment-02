@@ -54,7 +54,7 @@ public class TrackController {
 
     // 특정 프로젝트에 속하는 특정 트랙 삭제하기
     @DeleteMapping("/{trackId}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long trackId) {
+    public ResponseEntity<Void> deleteTrack(@PathVariable Long trackId) {
         trackService.deleteTrack(trackId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
