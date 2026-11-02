@@ -1,0 +1,12 @@
+erDiagram
+    GENRES ||--o{ BOOKS : contains
+    GENRES {
+        BIGINT id PK
+        VARCHAR name
+    }
+    BOOKS {
+        BIGINT id PK
+        VARCHAR title
+        VARCHAR author
+        BIGINT genre_id FK
+    }

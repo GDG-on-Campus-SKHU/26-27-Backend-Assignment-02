@@ -1,0 +1,561 @@
+{
+  "info": {
+    "name": "Leesak Books and Genres API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "SQL & JPA assignment. Actual API assertions, relationship reassignment, errors and cleanup."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "01 Create genre - Literature",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "pm.collectionVariables.set(\"genreId\", pm.response.json().id);",
+              "pm.test(\"Genre name\", () => pm.expect(pm.response.json().name).to.eql(\"문학\"));",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/genres",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \"문학\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "02 Create genre - Technology",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "pm.collectionVariables.set(\"secondGenreId\", pm.response.json().id);",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/genres",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \"기술\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "03 List genres",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Genre list\", () => pm.expect(pm.response.json()).to.be.an(\"array\"));",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/genres"
+      }
+    },
+    {
+      "name": "04 Get genre",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Genre detail\", () => pm.expect(pm.response.json().id).to.eql(Number(pm.collectionVariables.get(\"genreId\"))));",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/genres/{{genreId}}"
+      }
+    },
+    {
+      "name": "05 Update genre",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Updated genre\", () => pm.expect(pm.response.json().name).to.eql(\"한국 문학\"));",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/genres/{{genreId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \"한국 문학\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "06 Create book",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", function () { pm.response.to.have.status(201); });",
+              "pm.collectionVariables.set(\"bookId\", pm.response.json().id);",
+              "pm.test(\"Book title\", () => pm.expect(pm.response.json().title).to.eql(\"소년이 온다\"));",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/books",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"title\": \"소년이 온다\", \"author\": \"한강\", \"genreId\": {{genreId}}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "07 List books",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Book list\", () => pm.expect(pm.response.json()).to.be.an(\"array\"));",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/books"
+      }
+    },
+    {
+      "name": "08 Get book",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Book genre FK\", () => pm.expect(pm.response.json().genreId).to.eql(Number(pm.collectionVariables.get(\"genreId\"))));",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/books/{{bookId}}"
+      }
+    },
+    {
+      "name": "09 Get genre with books",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"One-to-many\", () => pm.expect(pm.response.json().books.map(b => b.id)).to.include(Number(pm.collectionVariables.get(\"bookId\"))));",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/genres/{{genreId}}"
+      }
+    },
+    {
+      "name": "10 Prevent deleting nonempty genre",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", function () { pm.response.to.have.status(409); });",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/genres/{{genreId}}"
+      }
+    },
+    {
+      "name": "11 Reject blank book title",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", function () { pm.response.to.have.status(400); });",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/books",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"title\": \" \", \"author\": \"한강\", \"genreId\": {{genreId}}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "12 Reject missing genre",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", function () { pm.response.to.have.status(404); });",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/books",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"title\": \"테스트\", \"author\": \"작가\", \"genreId\": 9223372036854775806}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "13 Reject blank genre",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", function () { pm.response.to.have.status(400); });",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/genres",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \" \"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "14 Missing book returns 404",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", function () { pm.response.to.have.status(404); });",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/books/9223372036854775806"
+      }
+    },
+    {
+      "name": "15 Update book title and genre",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Partial update preserves author\", () => pm.expect(pm.response.json().author).to.eql(\"한강\"));",
+              "pm.test(\"Genre reassignment\", () => pm.expect(pm.response.json().genreId).to.eql(Number(pm.collectionVariables.get(\"secondGenreId\"))));",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": "{{baseUrl}}/books/{{bookId}}",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"title\": \"채식주의자\", \"genreId\": {{secondGenreId}}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "16 Old genre has no books",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", function () { pm.response.to.have.status(200); });",
+              "pm.test(\"Old relationship removed\", () => pm.expect(pm.response.json().books).to.have.lengthOf(0));",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/genres/{{genreId}}"
+      }
+    },
+    {
+      "name": "17 Delete book",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/books/{{bookId}}"
+      }
+    },
+    {
+      "name": "18 Deleted book returns 404",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", function () { pm.response.to.have.status(404); });",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/books/{{bookId}}"
+      }
+    },
+    {
+      "name": "19 Delete first genre",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/genres/{{genreId}}"
+      }
+    },
+    {
+      "name": "20 Delete second genre",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 204\", function () { pm.response.to.have.status(204); });",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": "{{baseUrl}}/genres/{{secondGenreId}}"
+      }
+    },
+    {
+      "name": "21 Deleted genre returns 404",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", function () { pm.response.to.have.status(404); });",
+              "console.log(pm.request.method + \" \" + pm.request.url.toString() + \" => \" + pm.response.code + \"\\n\" + pm.response.text());"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "{{baseUrl}}/genres/{{genreId}}"
+      }
+    }
+  ]
+}

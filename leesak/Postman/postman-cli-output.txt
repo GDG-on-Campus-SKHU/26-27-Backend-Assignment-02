@@ -1,0 +1,242 @@
+No authorization data found. Please use the `postman login` command.
+Refer:https://learning.postman.com/docs/postman-cli/postman-cli-options/#postman-login
+
+Running your collection...
+postman
+
+Leesak Books and Genres API
+
+Root 01 Create genre - Literature
+
+  POST http://localhost:18082/genres [201 Created, 225 B, 156 ms]
+  Pass  HTTP 201
+  Pass  Genre name
+  -
+  | 'POST http://localhost:18082/genres => 201\n' +
+  |   '{"id":1,"name":"문학","books":[]}'
+  -
+
+Root 02 Create genre - Technology
+
+  POST http://localhost:18082/genres [201 Created, 225 B, 4 ms]
+  Pass  HTTP 201
+  -
+  | 'POST http://localhost:18082/genres => 201\n' +
+  |   '{"id":2,"name":"기술","books":[]}'
+  -
+
+Root 03 List genres
+
+  GET http://localhost:18082/genres [200 OK, 229 B, 40 ms]
+  Pass  HTTP 200
+  Pass  Genre list
+  -
+  | 'GET http://localhost:18082/genres => 200\n' +
+  |   '[{"id":1,"name":"문학","books":[]},{"id":2,"name":"기술
+  | ","books":[]}]'
+  -
+
+Root 04 Get genre
+
+  GET http://localhost:18082/genres/1 [200 OK, 191 B, 8 ms]
+  Pass  HTTP 200
+  Pass  Genre detail
+  -
+  | 'GET http://localhost:18082/genres/1 => 200\n' +
+  |   '{"id":1,"name":"문학","books":[]}'
+  -
+
+Root 05 Update genre
+
+  PATCH http://localhost:18082/genres/1 [200 OK, 198 B, 8 ms]
+  Pass  HTTP 200
+  Pass  Updated genre
+  -
+  | 'PATCH http://localhost:18082/genres/1 => 200\n' +
+  |   '{"id":1,"name":"한국 문학","books":[]}'
+  -
+
+Root 06 Create book
+
+  POST http://localhost:18082/books [201 Created, 282 B, 11 ms]
+  Pass  HTTP 201
+  Pass  Book title
+  -
+  | 'POST http://localhost:18082/books => 201\n' +
+  |   '{"id":1,"title":"소년이 온다","author":"한강","genreId":1,
+  | "genreName":"한국 문학"}'
+  -
+
+Root 07 List books
+
+  GET http://localhost:18082/books [200 OK, 251 B, 8 ms]
+  Pass  HTTP 200
+  Pass  Book list
+  -
+  | 'GET http://localhost:18082/books => 200\n' +
+  |   '[{"id":1,"title":"소년이 온다","author":"한강","genreId":1
+  | ,"genreName":"한국 문학"}]'
+  -
+
+Root 08 Get book
+
+  GET http://localhost:18082/books/1 [200 OK, 249 B, 6 ms]
+  Pass  HTTP 200
+  Pass  Book genre FK
+  -
+  | 'GET http://localhost:18082/books/1 => 200\n' +
+  |   '{"id":1,"title":"소년이 온다","author":"한강","genreId":1,
+  | "genreName":"한국 문학"}'
+  -
+
+Root 09 Get genre with books
+
+  GET http://localhost:18082/genres/1 [200 OK, 251 B, 5 ms]
+  Pass  HTTP 200
+  Pass  One-to-many
+  -
+  | 'GET http://localhost:18082/genres/1 => 200\n' +
+  |   '{"id":1,"name":"한국 문학","books":[{"id":1,"title":"소년
+  | 이 온다","author":"한강"}]}'
+  -
+
+Root 10 Prevent deleting nonempty genre
+
+  DELETE http://localhost:18082/genres/1 [409 Conflict, 363 B, 40 ms]
+  Pass  HTTP 409
+  -
+  | 'DELETE http://localhost:18082/genres/1 => 409\n' +
+  |   '{"detail":"도서가 등록된 장르는 삭제할 수 없습니다. 도서를 삭제하거나 다른 장르로
+  |  옮겨주세요.","instance":"/genres/1","status":409,"title":"
+  | Conflict"}'
+  -
+
+Root 11 Reject blank book title
+
+  POST http://localhost:18082/books [400 Bad Request, 250 B, 3 ms]
+  Pass  HTTP 400
+  -
+  | 'POST http://localhost:18082/books => 400\n' +
+  |   '{"detail":"title은(는) 필수입니다.","instance":"/books","s
+  | tatus":400,"title":"Bad Request"}'
+  -
+
+Root 12 Reject missing genre
+
+  POST http://localhost:18082/books [404 Not Found, 299 B, 4 ms]
+  Pass  HTTP 404
+  -
+  | 'POST http://localhost:18082/books => 404\n' +
+  |   '{"detail":"장르를 찾을 수 없습니다: 9223372036854775806","ins
+  | tance":"/books","status":404,"title":"Not Found"}'
+  -
+
+Root 13 Reject blank genre
+
+  POST http://localhost:18082/genres [400 Bad Request, 250 B, 3 ms]
+  Pass  HTTP 400
+  -
+  | 'POST http://localhost:18082/genres => 400\n' +
+  |   '{"detail":"name은(는) 필수입니다.","instance":"/genres","s
+  | tatus":400,"title":"Bad Request"}'
+  -
+
+Root 14 Missing book returns 404
+
+  GET http://localhost:18082/books/9223372036854775806 [404 Not Found, 319 B, 5 ms]
+  Pass  HTTP 404
+  -
+  | 'GET http://localhost:18082/books/9223372036854775806
+  | => 404\n' +
+  |   '{"detail":"도서를 찾을 수 없습니다: 9223372036854775806","ins
+  | tance":"/books/9223372036854775806","status":404,"titl
+  | e":"Not Found"}'
+  -
+
+Root 15 Update book title and genre
+
+  PATCH http://localhost:18082/books/1 [200 OK, 241 B, 9 ms]
+  Pass  HTTP 200
+  Pass  Partial update preserves author
+  Pass  Genre reassignment
+  -
+  | 'PATCH http://localhost:18082/books/1 => 200\n' +
+  |   '{"id":1,"title":"채식주의자","author":"한강","genreId":2,"
+  | genreName":"기술"}'
+  -
+
+Root 16 Old genre has no books
+
+  GET http://localhost:18082/genres/1 [200 OK, 198 B, 3 ms]
+  Pass  HTTP 200
+  Pass  Old relationship removed
+  -
+  | 'GET http://localhost:18082/genres/1 => 200\n' +
+  |   '{"id":1,"name":"한국 문학","books":[]}'
+  -
+
+Root 17 Delete book
+
+  DELETE http://localhost:18082/books/1 [204 No Content, 112 B, 6 ms]
+  Pass  HTTP 204
+  -
+  | 'DELETE http://localhost:18082/books/1 => 204\n'
+  -
+
+Root 18 Deleted book returns 404
+
+  GET http://localhost:18082/books/1 [404 Not Found, 283 B, 4 ms]
+  Pass  HTTP 404
+  -
+  | 'GET http://localhost:18082/books/1 => 404\n' +
+  |   '{"detail":"도서를 찾을 수 없습니다: 1","instance":"/books/1",
+  | "status":404,"title":"Not Found"}'
+  -
+
+Root 19 Delete first genre
+
+  DELETE http://localhost:18082/genres/1 [204 No Content, 112 B, 6 ms]
+  Pass  HTTP 204
+  -
+  | 'DELETE http://localhost:18082/genres/1 => 204\n'
+  -
+
+Root 20 Delete second genre
+
+  DELETE http://localhost:18082/genres/2 [204 No Content, 112 B, 4 ms]
+  Pass  HTTP 204
+  -
+  | 'DELETE http://localhost:18082/genres/2 => 204\n'
+  -
+
+Root 21 Deleted genre returns 404
+
+  GET http://localhost:18082/genres/1 [404 Not Found, 284 B, 4 ms]
+  Pass  HTTP 404
+  -
+  | 'GET http://localhost:18082/genres/1 => 404\n' +
+  |   '{"detail":"장르를 찾을 수 없습니다: 1","instance":"/genres/1"
+  | ,"status":404,"title":"Not Found"}'
+  -
+
+----------------------------------------------------------------------
+|                         |            executed |             failed |
+--------------------------+---------------------+---------------------
+|              iterations |                   1 |                  0 |
+--------------------------+---------------------+---------------------
+|                requests |                  21 |                  0 |
+--------------------------+---------------------+---------------------
+|            test-scripts |                  21 |                  0 |
+--------------------------+---------------------+---------------------
+|      prerequest-scripts |                   0 |                  0 |
+--------------------------+---------------------+---------------------
+|              assertions |                  32 |                  0 |
+----------------------------------------------------------------------
+| total run duration: 544 ms                                         |
+----------------------------------------------------------------------
+| total data received: 1.54 KB (approx)                              |
+----------------------------------------------------------------------
+| average response time: 16 ms [min: 3 ms, max: 156 ms, s.d.: 32 ms] |
+----------------------------------------------------------------------
+Postman credentials are required for publishing run details to Postman cloud.
+Please specify it by using the `postman login` command
