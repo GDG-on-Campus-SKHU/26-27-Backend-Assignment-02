@@ -38,24 +38,29 @@ public class TrackController {
     // 특정 프로젝트에 속하는 특정 트랙 불러오기
     @GetMapping("/{trackId}")
     public ResponseEntity<TrackResponseDto> getTrack(
+            @PathVariable Long projectId,
             @PathVariable Long trackId
     ) {
-        return ResponseEntity.ok(trackService.getTrack(trackId));
+        return ResponseEntity.ok(trackService.getTrack(projectId, trackId));
     }
 
     // 특정 프로젝트에 속하는 특정 트랙 수정하기
     @PatchMapping("/{trackId}")
     public ResponseEntity<TrackResponseDto> updateTrack(
+            @PathVariable Long projectId,
             @PathVariable Long trackId,
             @RequestBody TrackUpdateRequestDto request
     ) {
-        return ResponseEntity.ok(trackService.updateTrack(trackId, request));
+        return ResponseEntity.ok(trackService.updateTrack(projectId, trackId, request));
     }
 
     // 특정 프로젝트에 속하는 특정 트랙 삭제하기
     @DeleteMapping("/{trackId}")
-    public ResponseEntity<Void> deleteTrack(@PathVariable Long trackId) {
-        trackService.deleteTrack(trackId);
+    public ResponseEntity<Void> deleteTrack(
+            @PathVariable Long projectId,
+            @PathVariable Long trackId
+    ) {
+        trackService.deleteTrack(projectId, trackId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
