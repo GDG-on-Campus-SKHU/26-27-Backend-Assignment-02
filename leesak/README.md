@@ -13,7 +13,37 @@ cd leesak/Jpa
 ./gradlew bootRun
 ```
 
-기본 주소는 `http://localhost:8080`입니다. MySQL을 사용하려면 데이터베이스를 먼저 생성하고 환경변수와 `mysql` 프로필을 설정합니다.
+기본 주소는 `http://localhost:8080`입니다.
+
+### H2 접속 환경변수
+
+프로필을 별도로 지정하지 않으면 H2 파일 DB를 사용합니다. `application.yaml`의 H2 접속 설정은 아래 환경변수에서 읽으며, 변수가 없으면 개발용 기본값으로 실행합니다.
+
+| 환경변수 | 용도 | 미설정 시 기본값 |
+|---|---|---|
+| `H2_DB_URL` | H2 JDBC 접속 주소 | `jdbc:h2:file:./data/books;DB_CLOSE_ON_EXIT=FALSE` |
+| `H2_DB_USER_NAME` | H2 접속 계정 | `sa` |
+| `H2_DB_PASSWORD` | H2 접속 비밀번호 | 빈 문자열 |
+
+`${변수명:기본값}` 형식을 사용하므로 환경변수를 설정하지 않아도 기존 실행 방법을 사용할 수 있습니다. 기본 파일 DB는 재시작해도 데이터가 유지되며, 상대 경로는 앱을 실행한 작업 폴더를 기준으로 합니다.
+
+다른 접속값으로 실행하려면 다음처럼 환경변수를 전달합니다. 아래 예시는 새 파일 DB인 `books-local`을 사용합니다.
+
+```bash
+cd leesak/Jpa
+export H2_DB_URL='jdbc:h2:file:./data/books-local;DB_CLOSE_ON_EXIT=FALSE'
+export H2_DB_USER_NAME='local_user'
+export H2_DB_PASSWORD='본인의_로컬_DB_비밀번호'
+./gradlew bootRun
+```
+
+기존 파일 DB에 접속할 때는 해당 DB를 생성할 때 사용한 계정과 비밀번호를 설정합니다. 환경변수를 바꾼 뒤에는 앱을 다시 실행합니다.
+
+IntelliJ에서 실행한다면 `Run/Debug Configurations`의 `Environment variables`에 같은 변수들을 등록합니다. 터미널의 `export`는 해당 터미널에서 시작한 프로세스에 적용되므로, IntelliJ 실행 설정에도 필요한 값을 별도로 등록해야 합니다. 실제 비밀번호는 로컬 실행 환경에만 설정하고 저장소에는 변수명과 예시만 기록합니다.
+
+### MySQL 접속 환경변수
+
+MySQL을 사용하려면 데이터베이스를 먼저 생성하고 `DB_URL`, `DB_USER_NAME`, `DB_PASSWORD`와 `mysql` 프로필을 설정합니다. 이 프로필이 활성화되면 MySQL 접속 설정이 적용됩니다.
 
 ```bash
 export DB_URL='jdbc:mysql://localhost:3306/books?serverTimezone=Asia/Seoul&characterEncoding=UTF-8'
@@ -22,7 +52,7 @@ export DB_PASSWORD='비밀번호'
 ./gradlew bootRun --args='--spring.profiles.active=mysql'
 ```
 
-DB 계정 정보는 소스에 포함하지 않습니다. 기본 파일 DB는 재시작해도 데이터가 유지됩니다.
+IntelliJ 실행 설정에서는 위 세 변수와 `SPRING_PROFILES_ACTIVE=mysql`을 등록해도 됩니다. MySQL 접속 변수에는 기본값이 없으므로 실제 환경에 맞는 값을 지정해야 합니다. H2용 `H2_DB_*` 변수와 MySQL용 `DB_*` 변수는 구분해서 사용합니다.
 
 ## 엔티티 관계
 
