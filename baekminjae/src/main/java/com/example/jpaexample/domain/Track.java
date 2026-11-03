@@ -41,6 +41,9 @@ public class Track {
 
     public void update(String name, Double gainDb, Boolean muted) {
         if (name != null) {
+            if  (name.isBlank()) {
+                throw new IllegalArgumentException("트랙 제목은 비어 있을 수 없습니다.");
+            }
             this.name = name;
         }
         if (gainDb != null) {
