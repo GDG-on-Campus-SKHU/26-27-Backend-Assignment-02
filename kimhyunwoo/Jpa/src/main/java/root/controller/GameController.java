@@ -29,7 +29,7 @@ public class GameController {
     }
 
     @GetMapping
-    public ResponseEntity<List<GameInfoResponseDto>> getAllGame() {
-        return ResponseEntity.status(HttpStatus.OK).body(gameService.getAllGame());
+    public ResponseEntity<List<GameInfoResponseDto>> getAllGames() {
+        return ResponseEntity.status(HttpStatus.OK).body(gameService.getAllGames());
     }
 }

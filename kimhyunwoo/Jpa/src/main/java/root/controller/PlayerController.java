@@ -40,7 +40,7 @@ public class PlayerController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PlayerInfoResponseDto>> getAllPlayer() {
-        return ResponseEntity.status(HttpStatus.OK).body(playerService.getAllPlayer());
+    public ResponseEntity<List<PlayerInfoResponseDto>> getAllPlayers() {
+        return ResponseEntity.status(HttpStatus.OK).body(playerService.getAllPlayers());
     }
 }

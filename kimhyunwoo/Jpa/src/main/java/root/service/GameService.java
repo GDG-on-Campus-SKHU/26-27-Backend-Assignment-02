@@ -30,11 +30,13 @@ public class GameService {
 
     @Transactional
     public void deleteGame(Long gameId) {
+        Game game=gameRepository.findById(gameId)
+                .orElseThrow(() -> new IllegalArgumentException("요청하신 게임 정보를 찾을 수 없습니다."));
         gameRepository.deleteById(gameId);
     }
 
     @Transactional(readOnly = true)
-    public List<GameInfoResponseDto> getAllGame() {
+    public List<GameInfoResponseDto> getAllGames() {
         return gameRepository.findAll()
                 .stream()
                 .map(GameInfoResponseDto::from)

@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.gdg'
 version = '0.0.1-SNAPSHOT'
-description = 'JSA'
+description = 'Jpa'
 
 java {
     toolchain {

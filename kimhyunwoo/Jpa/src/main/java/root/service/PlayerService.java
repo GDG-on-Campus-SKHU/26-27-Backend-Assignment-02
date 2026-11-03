@@ -3,7 +3,6 @@ package root.service;
 import root.domain.Game;
 import root.domain.Player;
 import root.repository.GameRepository;
-import root.repository.GameRepository;
 import root.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,16 +37,14 @@ public class PlayerService {
 
     @Transactional(readOnly = true)
     public PlayerInfoResponseDto getPlayer(Long playerId) {
-        Player player = playerRepository.findById(playerId)
-                .orElseThrow(() -> new IllegalArgumentException("요청하신 플레이어 정보를 찾을 수 없습니다."));
+        Player player = findPlayer(playerId);
 
         return PlayerInfoResponseDto.from(player);
     }
 
     @Transactional
     public PlayerInfoResponseDto updatePlayer(Long playerId, PlayerSaveRequestDto playerSaveRequestDto) {
-        Player player = playerRepository.findById(playerId)
-                .orElseThrow(() -> new IllegalArgumentException("요청하신 플레이어 정보를 찾을 수 없습니다."));
+        Player player = findPlayer(playerId);
 
         player.update(playerSaveRequestDto.name(),
                 playerSaveRequestDto.nickname());
@@ -57,14 +54,20 @@ public class PlayerService {
 
     @Transactional
     public void deletePlayer(Long playerId) {
+        Player player = findPlayer(playerId);
         playerRepository.deleteById(playerId);
     }
 
     @Transactional(readOnly = true)
-    public List<PlayerInfoResponseDto> getAllPlayer() {
+    public List<PlayerInfoResponseDto> getAllPlayers() {
         return playerRepository.findAll()
                 .stream()
                 .map(PlayerInfoResponseDto::from)
                 .toList();
+    }
+    private Player findPlayer(Long playerId)
+    {
+        return playerRepository.findById(playerId)
+                .orElseThrow(() -> new IllegalArgumentException("요청하신 플레이어 정보를 찾을 수 없습니다."));
     }
 }
