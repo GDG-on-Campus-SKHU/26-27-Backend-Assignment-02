@@ -19,8 +19,9 @@ public class TrackService {
     private final TrackRepository trackRepository;
     private final ProjectService projectService;
 
-    // 트랙이 존재하는지 확인하기
-    public Track validateTrackExists(Long trackId) {
+    // 트랙을 불러오고
+    // 존재하지 않을 경우 예외처리 하기
+    public Track getTrackOrThrow(Long trackId) {
         return trackRepository.findById(trackId)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
@@ -28,10 +29,9 @@ public class TrackService {
                 ));
     }
 
-    private Track validateTrackInProject(Long projectId, Long trackId) {
-        // 프로젝트와 트랙이 존재하는지 각각 확인하기
-        Project project = projectService.validateProjectExists(projectId);
-        Track track = validateTrackExists(trackId);
+    private Track getTrackInProjectOrThrow(Long projectId, Long trackId) {
+        Project project = projectService.getProjectOrThrow(projectId);
+        Track track = getTrackOrThrow(trackId);
 
         // 트랙이 해당 프로젝트에 속하는지 확인하기
         if (!track.getProject().getId().equals(project.getId()))  {
@@ -47,7 +47,7 @@ public class TrackService {
     @Transactional
     public TrackResponseDto saveTrack(Long projectId) {
         // 트랙 id 로 Project 객체 확인하기
-        Project project = projectService.validateProjectExists(projectId);
+        Project project = projectService.getProjectOrThrow(projectId);
 
         // Project 객체로 Track 객체 생성하기
         Track track = Track.builder()
@@ -60,7 +60,7 @@ public class TrackService {
 
     @Transactional(readOnly = true)
     public List<TrackResponseDto> getAllTrack(Long projectId) {
-        Project project = projectService.validateProjectExists(projectId);
+        Project project = projectService.getProjectOrThrow(projectId);
 
         return trackRepository.findAll().stream()
                 .filter(track -> track.getProject().getId().equals(project.getId()))
@@ -70,13 +70,13 @@ public class TrackService {
 
     @Transactional(readOnly = true)
     public TrackResponseDto getTrack(Long projectId, Long trackId) {
-        Track track = validateTrackInProject(projectId, trackId);
+        Track track = getTrackInProjectOrThrow(projectId, trackId);
         return TrackResponseDto.from(track);
     }
 
     @Transactional
     public TrackResponseDto updateTrack(Long projectId, Long trackId, TrackUpdateRequestDto request) {
-        Track track = validateTrackInProject(projectId, trackId);
+        Track track = getTrackInProjectOrThrow(projectId, trackId);
 
         if (request.gainDb() != null
                 && (!Double.isFinite(request.gainDb()) || request.gainDb() < -60.0 || request.gainDb() > 12.0 )) {
@@ -90,7 +90,7 @@ public class TrackService {
 
     @Transactional
     public void deleteTrack(Long projectId, Long trackId) {
-        Track track = validateTrackInProject(projectId, trackId);
+        Track track = getTrackInProjectOrThrow(projectId, trackId);
         trackRepository.deleteById(track.getId());
     }
 }

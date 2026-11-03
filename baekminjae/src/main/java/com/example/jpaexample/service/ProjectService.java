@@ -18,8 +18,9 @@ import java.util.List;
 public class ProjectService {
     private final ProjectRepository projectRepository;
 
-    // 프로젝트가 존재하는지 확인하기
-    public Project validateProjectExists(Long projectId) {
+    // 프로젝트를 불러오고
+    // 존재하지 않을경우 예외처리 하기
+    public Project getProjectOrThrow(Long projectId) {
         return projectRepository.findById(projectId)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
@@ -50,13 +51,13 @@ public class ProjectService {
 
     @Transactional(readOnly = true)
     public ProjectResponseDto getProject(Long projectId) {
-        Project project = validateProjectExists(projectId);
+        Project project = getProjectOrThrow(projectId);
         return ProjectResponseDto.from(project);
     }
 
     @Transactional
     public ProjectResponseDto renameProject(Long projectId, ProjectRenameRequestDto request) {
-        Project project = validateProjectExists(projectId);
+        Project project = getProjectOrThrow(projectId);
 
         try {
             project.rename(request.projectTitle());
@@ -72,7 +73,7 @@ public class ProjectService {
 
     @Transactional
     public void deleteProject(Long projectId) {
-        Project project = validateProjectExists(projectId);
+        Project project = getProjectOrThrow(projectId);
         projectRepository.delete(project);
     }
 }
