@@ -44,6 +44,11 @@ public class Track {
             this.name = name;
         }
         if (gainDb != null) {
+            if (!Double.isFinite(gainDb) || gainDb < -60.0 || gainDb > 12.0) {
+                throw new IllegalArgumentException(
+                        "볼륨 게인은 -60.0 ~ 12dB 사이여야 합니다."
+                );
+            }
             this.gainDb = gainDb;
         }
         if (muted != null) {

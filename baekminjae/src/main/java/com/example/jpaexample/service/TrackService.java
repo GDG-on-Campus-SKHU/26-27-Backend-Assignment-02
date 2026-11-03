@@ -34,7 +34,7 @@ public class TrackService {
         Track track = getTrackOrThrow(trackId);
 
         // 트랙이 해당 프로젝트에 속하는지 확인하기
-        if (!track.getProject().getId().equals(project.getId()))  {
+        if (!track.getProject().getId().equals(project.getId())) {
             throw new ResponseStatusException(
                     HttpStatus.NOT_FOUND,
                     "해당 프로젝트에 속한 트랙이 아닙니다."
@@ -78,13 +78,15 @@ public class TrackService {
     public TrackResponseDto updateTrack(Long projectId, Long trackId, TrackUpdateRequestDto request) {
         Track track = getTrackInProjectOrThrow(projectId, trackId);
 
-        if (request.gainDb() != null
-                && (!Double.isFinite(request.gainDb()) || request.gainDb() < -60.0 || request.gainDb() > 12.0 )) {
+        try {
+            track.update(request.name(), request.gainDb(), request.muted());
+        } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "볼륨 게인은 -60.0 ~ 12dB 사이여야 합니다.");
+                    HttpStatus.BAD_REQUEST,
+                    e.getMessage(),
+                    e);
         }
 
-        track.update(request.name(), request.gainDb(), request.muted());
         return TrackResponseDto.from(track);
     }
 
