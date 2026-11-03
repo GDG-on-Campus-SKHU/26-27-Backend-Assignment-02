@@ -31,7 +31,14 @@ public class AuthorService {
 
     @Transactional
     public void deleteAuthor(Long authorId) {
-        authorRepository.deleteById(authorId);
+        Author author = authorRepository.findById(authorId)
+                .orElseThrow(() -> new IllegalArgumentException("삭제하려는 작가를 찾을 수 없습니다. id: " + authorId));
+
+        if (!author.getBooks().isEmpty()) {
+            throw new IllegalArgumentException("책이 남아 있는 작가는 삭제할 수 없습니다. 책을 먼저 삭제해주세요.");
+        }
+
+        authorRepository.delete(author);
     }
 
     @Transactional(readOnly = true)

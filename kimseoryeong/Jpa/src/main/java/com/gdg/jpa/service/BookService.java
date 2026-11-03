@@ -4,6 +4,7 @@ import com.gdg.jpa.domain.Author;
 import com.gdg.jpa.domain.Book;
 import com.gdg.jpa.dto.BookInfoResponseDto;
 import com.gdg.jpa.dto.BookSaveRequestDto;
+import com.gdg.jpa.dto.BookUpdateRequestDto;
 import com.gdg.jpa.repository.AuthorRepository;
 import com.gdg.jpa.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,10 @@ public class BookService {
 
     @Transactional
     public BookInfoResponseDto saveBook(BookSaveRequestDto bookSaveRequestDto) {
+        if (bookSaveRequestDto.authorId() == null) {
+            throw new IllegalArgumentException("작가 id를 입력해주세요.");
+        }
+
         Author author = authorRepository.findById(bookSaveRequestDto.authorId())
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 작가입니다."));
 
@@ -39,25 +44,28 @@ public class BookService {
     @Transactional(readOnly = true)
     public BookInfoResponseDto getBook(Long bookId) {
         Book book = bookRepository.findById(bookId)
-                .orElseThrow(() -> new IllegalArgumentException("요청하신 책 정보를 찾을 수 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("조회하려는 책을 찾을 수 없습니다. id: " + bookId));
 
         return BookInfoResponseDto.from(book);
     }
 
     @Transactional
-    public BookInfoResponseDto updateBook(Long bookId, BookSaveRequestDto bookSaveRequestDto) {
+    public BookInfoResponseDto updateBook(Long bookId, BookUpdateRequestDto bookUpdateRequestDto) {
         Book book = bookRepository.findById(bookId)
-                .orElseThrow(() -> new IllegalArgumentException("요청하신 책 정보를 찾을 수 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("수정하려는 책을 찾을 수 없습니다. id: " + bookId));
 
-        book.update(bookSaveRequestDto.title(),
-                bookSaveRequestDto.price());
+        book.update(bookUpdateRequestDto.title(),
+                bookUpdateRequestDto.price());
 
         return BookInfoResponseDto.from(book);
     }
 
     @Transactional
     public void deleteBook(Long bookId) {
-        bookRepository.deleteById(bookId);
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new IllegalArgumentException("삭제하려는 책을 찾을 수 없습니다. id: " + bookId));
+
+        bookRepository.delete(book);
     }
 
     @Transactional(readOnly = true)
