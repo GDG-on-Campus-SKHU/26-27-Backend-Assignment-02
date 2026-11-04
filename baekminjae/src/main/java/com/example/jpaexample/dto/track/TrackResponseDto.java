@@ -17,7 +17,7 @@ public record TrackResponseDto(
                 .id(track.getId())
                 .name(track.getName())
                 .gainDb(track.getGainDb())
-                .muted(track.getMuted())
+                .muted(track.isMuted())
                 .projectId(track.getProject().getId())
                 .build();
     }
