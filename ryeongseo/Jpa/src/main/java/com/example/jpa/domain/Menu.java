@@ -25,6 +25,7 @@ public class Menu {
     @Column(nullable = false)
     private String name;
 
+
     @Column(nullable = false)
     private int price;
 
@@ -43,7 +44,12 @@ public class Menu {
         if (name != null) {
             this.name = name;
         }
+
         if (price != null) {
+            if (price <= 0) {
+                throw new IllegalArgumentException("가격은 0보다 커야 합니다.");
+            }
             this.price = price;
         }
     }
+}

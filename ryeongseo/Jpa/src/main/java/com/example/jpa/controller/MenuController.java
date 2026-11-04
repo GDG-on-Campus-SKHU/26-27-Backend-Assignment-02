@@ -1,8 +1,9 @@
 package com.example.jpa.controller;
 
-import com.example.jpaexample.dto.MenuInfoResponseDto;
-import com.example.jpaexample.dto.MenuSaveRequestDto;
-import com.example.jpaexample.service.MenuService;
+
+import com.example.jpa.dto.MenuInfoResponseDto;
+import com.example.jpa.dto.MenuSaveRequestDto;
+import com.example.jpa.service.MenuService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

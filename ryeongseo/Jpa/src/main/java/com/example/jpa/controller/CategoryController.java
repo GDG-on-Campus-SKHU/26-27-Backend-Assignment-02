@@ -1,10 +1,8 @@
 package com.example.jpa.controller;
 
-MenuControllerpackage com.example.jpaexample.controller;
-
-import com.example.jpaexample.dto.CategoryInfoResponseDto;
-import com.example.jpaexample.dto.CategorySaveRequestDto;
-import com.example.jpaexample.service.CategoryService;
+import com.example.jpa.dto.CategoryInfoResponseDto;
+import com.example.jpa.dto.CategorySaveRequestDto;
+import com.example.jpa.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+
+
+
 
 @RestController
 @RequiredArgsConstructor

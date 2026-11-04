@@ -1,11 +1,12 @@
 package com.example.jpa.service;
 
-import com.example.jpaexample.domain.Category;
-import com.example.jpaexample.domain.Menu;
-import com.example.jpaexample.dto.MenuInfoResponseDto;
-import com.example.jpaexample.dto.MenuSaveRequestDto;
-import com.example.jpaexample.repository.CategoryRepository;
-import com.example.jpaexample.repository.MenuRepository;
+
+import com.example.jpa.domain.Category;
+import com.example.jpa.domain.Menu;
+import com.example.jpa.dto.MenuInfoResponseDto;
+import com.example.jpa.dto.MenuSaveRequestDto;
+import com.example.jpa.repository.CategoryRepository;
+import com.example.jpa.repository.MenuRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,7 +57,10 @@ public class MenuService {
 
     @Transactional
     public void deleteMenu(Long menuId) {
-        menuRepository.deleteById(menuId);
+        Menu menu = menuRepository.findById(menuId)
+                .orElseThrow(() -> new RuntimeException("메뉴를 찾을 수 없습니다."));
+
+        menuRepository.delete(menu);
     }
 
     @Transactional(readOnly = true)

@@ -1,6 +1,7 @@
 package com.example.jpa.dto;
 
-import com.example.jpaexample.domain.Category;
+
+import com.example.jpa.domain.Category;
 import lombok.Builder;
 
 @Builder

@@ -1,9 +1,10 @@
 package com.example.jpa.service;
 
-import com.example.jpaexample.domain.Category;
-import com.example.jpaexample.dto.CategoryInfoResponseDto;
-import com.example.jpaexample.dto.CategorySaveRequestDto;
-import com.example.jpaexample.repository.CategoryRepository;
+
+import com.example.jpa.domain.Category;
+import com.example.jpa.dto.CategoryInfoResponseDto;
+import com.example.jpa.dto.CategorySaveRequestDto;
+import com.example.jpa.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +30,10 @@ public class CategoryService {
 
     @Transactional
     public void deleteCategory(Long categoryId) {
-        categoryRepository.deleteById(categoryId);
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new RuntimeException("카테고리를 찾을 수 없습니다."));
+
+        categoryRepository.delete(category);
     }
 
     @Transactional(readOnly = true)

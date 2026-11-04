@@ -30,7 +30,8 @@ public class Category {
     private Long id;
 
 
-    @OneToMany(mappedBy = "category",
+    @OneToMany(
+            mappedBy = "category",
             fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             orphanRemoval = false)
