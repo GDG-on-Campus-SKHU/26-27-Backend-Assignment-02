@@ -93,7 +93,7 @@ public class Order {
 
     public void update(OrderType orderType, String menuName, Temperature temperature,
                        SizeOption sizeOption, CustomOption customOption, int quantity,
-                       int totalPrice, PaymentMethod paymentMethod, OrderStatus status) {
+                       int totalPrice, PaymentMethod paymentMethod) {
         this.orderType = orderType;
         this.menuName = menuName;
         this.temperature = temperature;
@@ -102,7 +102,6 @@ public class Order {
         this.quantity = quantity;
         this.totalPrice = totalPrice;
         this.paymentMethod = paymentMethod;
-        this.status = status;
     }
 
     // 제조 완료

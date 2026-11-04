@@ -122,8 +122,7 @@ public class OrderService {
                 orderUpdateRequestDto.customOption(),
                 orderUpdateRequestDto.quantity(),
                 orderUpdateRequestDto.totalPrice(),
-                orderUpdateRequestDto.paymentMethod(),
-                orderUpdateRequestDto.status()
+                orderUpdateRequestDto.paymentMethod()
         );
 
         return OrderInfoResponseDto.from(order);
