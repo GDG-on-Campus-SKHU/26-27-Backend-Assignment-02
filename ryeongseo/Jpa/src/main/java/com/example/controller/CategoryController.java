@@ -1,8 +1,8 @@
-package com.example.jpa.controller;
+package com.example.controller;
 
-import com.example.jpa.dto.CategoryInfoResponseDto;
-import com.example.jpa.dto.CategorySaveRequestDto;
-import com.example.jpa.service.CategoryService;
+import com.example.dto.CategoryInfoResponseDto;
+import com.example.dto.CategorySaveRequestDto;
+import com.example.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

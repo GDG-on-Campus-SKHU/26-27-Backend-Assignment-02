@@ -1,10 +1,10 @@
-package com.example.jpa.service;
+package com.example.service;
 
 
-import com.example.jpa.domain.Category;
-import com.example.jpa.dto.CategoryInfoResponseDto;
-import com.example.jpa.dto.CategorySaveRequestDto;
-import com.example.jpa.repository.CategoryRepository;
+import com.example.domain.Category;
+import com.example.dto.CategoryInfoResponseDto;
+import com.example.dto.CategorySaveRequestDto;
+import com.example.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

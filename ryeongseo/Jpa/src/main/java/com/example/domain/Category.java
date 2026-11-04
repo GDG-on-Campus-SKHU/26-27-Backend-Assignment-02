@@ -1,4 +1,4 @@
-package com.example.jpa.domain;
+package com.example.domain;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

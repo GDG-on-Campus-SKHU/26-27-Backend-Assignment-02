@@ -1,4 +1,4 @@
-package com.example.jpa.dto;
+package com.example.dto;
 
 public record CategorySaveRequestDto(
         String categoryName

@@ -1,4 +1,4 @@
-package com.example.jpa.domain;
+package com.example.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -52,4 +52,4 @@ public class Menu {
             this.price = price;
         }
     }
-}
+} //test

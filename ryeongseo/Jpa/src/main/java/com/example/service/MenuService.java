@@ -1,12 +1,12 @@
-package com.example.jpa.service;
+package com.example.service;
 
 
-import com.example.jpa.domain.Category;
-import com.example.jpa.domain.Menu;
-import com.example.jpa.dto.MenuInfoResponseDto;
-import com.example.jpa.dto.MenuSaveRequestDto;
-import com.example.jpa.repository.CategoryRepository;
-import com.example.jpa.repository.MenuRepository;
+import com.example.domain.Category;
+import com.example.domain.Menu;
+import com.example.dto.MenuInfoResponseDto;
+import com.example.dto.MenuSaveRequestDto;
+import com.example.repository.CategoryRepository;
+import com.example.repository.MenuRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
