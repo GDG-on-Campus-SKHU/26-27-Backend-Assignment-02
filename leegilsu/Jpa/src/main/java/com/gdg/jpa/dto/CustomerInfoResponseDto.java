@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 public record CustomerInfoResponseDto(
         Long id,
         String phoneNumber,
-        Integer stampCount,
-        Integer couponCount,
+        int stampCount,
+        int couponCount,
         LocalDateTime createdAt
 ) {
 

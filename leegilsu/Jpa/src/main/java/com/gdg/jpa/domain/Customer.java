@@ -31,11 +31,9 @@ public class Customer {
     @Column(nullable = false, unique = true)
     private String phoneNumber;
 
-    @Column(nullable = false)
-    private Integer stampCount;
+    private int stampCount;
 
-    @Column(nullable = false)
-    private Integer couponCount;
+    private int couponCount;
 
     @Column(updatable = false)
     private LocalDateTime createdAt;

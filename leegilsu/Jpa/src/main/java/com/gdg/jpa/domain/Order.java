@@ -54,10 +54,8 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private CustomOption customOption;
 
-    @Column(nullable = false)
     private int quantity;
 
-    @Column(nullable = false)
     private int totalPrice;
 
     @Enumerated(EnumType.STRING)

@@ -26,13 +26,11 @@ public record OrderUpdateRequestDto(
         @NotNull
         CustomOption customOption,
 
-        @NotNull
         @Positive(message = "개수는 0보다 커야 합니다.")
-        Integer quantity,
+        int quantity,
 
-        @NotNull
         @Positive(message = "금액은 0보다 커야 합니다.")
-        Integer totalPrice,
+        int totalPrice,
 
         @NotNull
         PaymentMethod paymentMethod,

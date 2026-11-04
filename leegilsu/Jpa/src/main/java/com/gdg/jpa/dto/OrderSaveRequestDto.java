@@ -29,11 +29,9 @@ public record OrderSaveRequestDto(
         @NotNull
         CustomOption customOption, // 샷추가, 연하게 등
 
-        @NotNull
         @Positive(message = "개수는 0보다 커야 합니다.")
         int quantity, // 개수
 
-        @NotNull
         @Positive(message = "금액은 0보다 커야 합니다.")
         int totalPrice, // 총금액
 
