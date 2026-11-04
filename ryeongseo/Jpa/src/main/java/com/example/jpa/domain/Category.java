@@ -1,4 +1,4 @@
-package com.example.jpaexample.domain;
+package com.example.jpa.domain;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -30,7 +30,11 @@ public class Category {
     private Long id;
 
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "category",
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            orphanRemoval = false)
+    //CascadeType.ALL & orphanRemoval 수정
     private List<Menu> menus = new ArrayList<>();
 
     @Builder

@@ -1,4 +1,4 @@
-package com.example.jpaexample.dto;
+package com.example.jpa.dto;
 
 import com.example.jpaexample.domain.Menu;
 import lombok.Builder;

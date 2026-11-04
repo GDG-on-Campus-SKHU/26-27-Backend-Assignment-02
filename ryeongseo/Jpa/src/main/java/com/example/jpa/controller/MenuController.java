@@ -1,4 +1,4 @@
-package com.example.jpaexample.controller;
+package com.example.jpa.controller;
 
 import com.example.jpaexample.dto.MenuInfoResponseDto;
 import com.example.jpaexample.dto.MenuSaveRequestDto;

@@ -1,3 +1,5 @@
+package com.example.jpa.controller;
+
 MenuControllerpackage com.example.jpaexample.controller;
 
 import com.example.jpaexample.dto.CategoryInfoResponseDto;

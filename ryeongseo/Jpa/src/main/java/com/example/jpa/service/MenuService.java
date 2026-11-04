@@ -1,4 +1,4 @@
-package com.example.jpaexample.service;
+package com.example.jpa.service;
 
 import com.example.jpaexample.domain.Category;
 import com.example.jpaexample.domain.Menu;
