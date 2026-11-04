@@ -1,7 +1,15 @@
 package com.gdg.jpa.domain;
 
+import com.gdg.jpa.domain.enums.CustomOption;
+import com.gdg.jpa.domain.enums.OrderStatus;
+import com.gdg.jpa.domain.enums.OrderType;
+import com.gdg.jpa.domain.enums.PaymentMethod;
+import com.gdg.jpa.domain.enums.SizeOption;
+import com.gdg.jpa.domain.enums.Temperature;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,36 +34,41 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "waiting_number", nullable = false)
+    @Column(nullable = false)
     private Integer waitingNumber;
 
-    @Column(name = "order_type", nullable = false)
-    private String orderType;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private OrderType orderType;
 
-    @Column(name = "menu_name", nullable = false)
+    @Column(nullable = false)
     private String menuName;
 
-    private String temperature;
+    @Enumerated(EnumType.STRING)
+    private Temperature temperature;
 
-    @Column(name = "size_option")
-    private String sizeOption;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private SizeOption sizeOption;
 
-    @Column(name = "custom_option")
-    private String customOption;
+    @Enumerated(EnumType.STRING)
+    private CustomOption customOption;
 
     @Column(nullable = false)
-    private Integer quantity;
-
-    @Column(name = "total_price", nullable = false)
-    private Integer totalPrice;
-
-    @Column(name = "payment_method", nullable = false)
-    private String paymentMethod;
+    private int quantity;
 
     @Column(nullable = false)
-    private String status;
+    private int totalPrice;
 
-    @Column(name = "created_at", updatable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PaymentMethod paymentMethod;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private OrderStatus status;
+
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -63,26 +76,26 @@ public class Order {
     private Customer customer;
 
     @Builder
-    public Order(Customer customer, Integer waitingNumber, String orderType, String menuName,
-                 String temperature, String sizeOption, String customOption, Integer quantity,
-                 Integer totalPrice, String paymentMethod, String status) {
+    public Order(Customer customer, Integer waitingNumber, OrderType orderType, String menuName,
+                 Temperature temperature, SizeOption sizeOption, CustomOption customOption, int quantity,
+                 int totalPrice, PaymentMethod paymentMethod) {
         this.customer = customer;
         this.waitingNumber = waitingNumber;
-        this.orderType = (orderType != null) ? orderType : "TAKE_OUT";
+        this.orderType = orderType;
         this.menuName = menuName;
-        this.temperature = (temperature != null) ? temperature : "ICE";
-        this.sizeOption = (sizeOption != null) ? sizeOption : "REGULAR";
-        this.customOption = customOption;
-        this.quantity = (quantity != null) ? quantity : 1;
+        this.temperature = temperature;
+        this.sizeOption = sizeOption;
+        this.customOption = (customOption != null) ? customOption : CustomOption.NONE;
+        this.quantity = quantity;
         this.totalPrice = totalPrice;
-        this.paymentMethod = (paymentMethod != null) ? paymentMethod : "CARD";
-        this.status = (status != null) ? status : "PREPARING";
-        this.createdAt = (createdAt != null) ? createdAt : LocalDateTime.now();
+        this.paymentMethod = paymentMethod;
+        this.status = OrderStatus.PREPARING;
+        this.createdAt = LocalDateTime.now();
     }
 
-    public void update(String orderType, String menuName, String temperature,
-                       String sizeOption, String customOption, Integer quantity,
-                       Integer totalPrice, String paymentMethod) {
+    public void update(OrderType orderType, String menuName, Temperature temperature,
+                       SizeOption sizeOption, CustomOption customOption, int quantity,
+                       int totalPrice, PaymentMethod paymentMethod, OrderStatus status) {
         this.orderType = orderType;
         this.menuName = menuName;
         this.temperature = temperature;
@@ -91,5 +104,28 @@ public class Order {
         this.quantity = quantity;
         this.totalPrice = totalPrice;
         this.paymentMethod = paymentMethod;
+        this.status = status;
+    }
+
+    // 제조 완료
+    public void completeOrder() {
+        if (this.status == OrderStatus.CANCELED) {
+            throw new IllegalArgumentException("이미 취소된 주문은 완료 처리할 수 없습니다.");
+        }
+        if (this.status == OrderStatus.COMPLETED) {
+            throw new IllegalArgumentException("이미 제조가 완료된 주문 입니다.");
+        }
+        this.status = OrderStatus.COMPLETED;
+    }
+
+    // 주문 취소
+    public void cancelOrder() {
+        if (this.status == OrderStatus.COMPLETED) {
+            throw new IllegalArgumentException("이미 제조가 완료된 주문은 취소할 수 없습니다.");
+        }
+        if (this.status == OrderStatus.CANCELED) {
+            throw new IllegalStateException("이미 취소 처리된 주문입니다.");
+        }
+        this.status = OrderStatus.CANCELED;
     }
 }

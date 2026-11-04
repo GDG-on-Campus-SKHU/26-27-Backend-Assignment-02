@@ -1,6 +1,12 @@
 package com.gdg.jpa.dto;
 
 import com.gdg.jpa.domain.Order;
+import com.gdg.jpa.domain.enums.CustomOption;
+import com.gdg.jpa.domain.enums.OrderStatus;
+import com.gdg.jpa.domain.enums.OrderType;
+import com.gdg.jpa.domain.enums.PaymentMethod;
+import com.gdg.jpa.domain.enums.SizeOption;
+import com.gdg.jpa.domain.enums.Temperature;
 import lombok.Builder;
 
 import java.time.LocalDateTime;
@@ -10,15 +16,15 @@ public record OrderInfoResponseDto(
         Long id,
         String customerPhoneNumber,
         Integer waitingNumber,
-        String orderType,
+        OrderType orderType,
         String menuName,
-        String temperature,
-        String sizeOption,
-        String customOption,
-        Integer quantity,
-        Integer totalPrice,
-        String paymentMethod,
-        String status,
+        Temperature temperature,
+        SizeOption sizeOption,
+        CustomOption customOption,
+        int quantity,
+        int totalPrice,
+        PaymentMethod paymentMethod,
+        OrderStatus status,
         LocalDateTime createdAt
 ) {
     public static OrderInfoResponseDto from(Order order) {

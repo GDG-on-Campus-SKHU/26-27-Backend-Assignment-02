@@ -28,40 +28,35 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "phone_number", unique = true)
+    @Column(nullable = false, unique = true)
     private String phoneNumber;
 
-    @Column(name = "stamp_count", nullable = false)
+    @Column(nullable = false)
     private Integer stampCount;
 
-    @Column(name = "coupon_count", nullable = false)
+    @Column(nullable = false)
     private Integer couponCount;
 
-    @Column(name = "created_at", updatable = false)
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
 
     @Builder
-    public Customer(String phoneNumber, Integer stampCount) {
+    public Customer(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-        this.stampCount = (stampCount != null) ? stampCount : 0;
-        this.couponCount = (couponCount != null) ? couponCount : 0;
-        this.createdAt = (createdAt != null) ? createdAt : LocalDateTime.now();
+        this.stampCount = 0;
+        this.couponCount = 0;
+        this.createdAt = LocalDateTime.now();
     }
 
-    // 스탬프 적립
-    public void addStamp(Integer count) {
-        if (count == null || count <= 0) {
+    // 스탬프 적립, 쿠폰 전환
+    public void addStamp(int count) {
+        if (count <= 0) {
             return;
         }
-        if (this.stampCount == null) {
-            this.stampCount = 0;
-        }
-        if (this.couponCount == null) {
-            this.couponCount = 0;
-        }
+
         this.stampCount += count; // 주문 수량만큼 스탬프 추가
 
         // 스탬프 10개 시 쿠폰 1개로 전환
@@ -69,5 +64,21 @@ public class Customer {
             this.couponCount += this.stampCount / 10;
             this.stampCount %= 10;
         }
+    }
+
+    // 스탬프 차감, 쿠폰 회수
+    public void subStamp(int count) {
+        if ( count <= 0) {
+            return;
+        }
+
+        int totalStamp = this.couponCount * 10 + this.stampCount;
+        totalStamp -= count; // 주문 취소 수량만큼 스탬프 차감
+        if (totalStamp < 0) {
+            totalStamp = 0;
+        }
+
+        this.couponCount = totalStamp / 10;
+        this.stampCount = totalStamp % 10;
     }
 }

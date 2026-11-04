@@ -2,7 +2,6 @@ package com.gdg.jpa.service;
 
 import com.gdg.jpa.domain.Customer;
 import com.gdg.jpa.dto.CustomerInfoResponseDto;
-import com.gdg.jpa.dto.CustomerSaveRequestDto;
 import com.gdg.jpa.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,23 +15,26 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
 
-    @Transactional
-    public CustomerInfoResponseDto saveCustomer(CustomerSaveRequestDto customerSaveRequestDto) {
-        Customer customer = Customer.builder()
-                .phoneNumber(customerSaveRequestDto.phoneNumber())
-                .build();
-
-        customerRepository.save(customer);
-
-        return CustomerInfoResponseDto.from(customer);
-    }
-
     @Transactional(readOnly = true)
     public CustomerInfoResponseDto getCustomer(Long customerId) {
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new IllegalArgumentException("요청하신 손님 정보를 찾을 수 없습니다."));
 
         return CustomerInfoResponseDto.from(customer);
+    }
+
+    @Transactional
+    public Customer getOrCreateCustomer(String phoneNumber) {
+        if (phoneNumber == null || phoneNumber.isBlank()) {
+            return null;
+        }
+
+        return customerRepository.findByPhoneNumber(phoneNumber)
+                .orElseGet(() -> customerRepository.save(
+                        Customer.builder()
+                                .phoneNumber(phoneNumber)
+                                .build()
+                ));
     }
 
     @Transactional(readOnly = true)
@@ -45,6 +47,9 @@ public class CustomerService {
 
     @Transactional
     public void deleteCustomer(Long customerId) {
-        customerRepository.deleteById(customerId);
+        Customer customer = customerRepository.findById(customerId)
+                        .orElseThrow(() -> new IllegalArgumentException("요청하신 손님 정보를 찾을 수 없습니다."));
+
+        customerRepository.delete(customer);
     }
 }
