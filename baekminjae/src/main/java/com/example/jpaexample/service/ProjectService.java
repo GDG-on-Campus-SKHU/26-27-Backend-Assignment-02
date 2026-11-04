@@ -30,16 +30,23 @@ public class ProjectService {
 
     @Transactional
     public ProjectResponseDto saveProject(ProjectCreateRequestDto request) {
-        // 프로젝트 이름으로 Project 객체 생성
-        Project project = Project.builder()
-                .projectTitle(request.projectTitle())
-                .build();
+        try {
+            // 프로젝트 이름으로 Project 객체 생성
+            Project project = Project.builder()
+                    .projectTitle(request.projectTitle())
+                    .build();
 
-        // 저장소에 Project 객체 저장하기
-        projectRepository.save(project);
+            // 저장소에 Project 객체 저장하기
+            projectRepository.save(project);
 
-        // Project 객체 반환하기
-        return ProjectResponseDto.from(project);
+            // Project 객체 반환하기
+            return ProjectResponseDto.from(project);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    e.getMessage(),
+                    e);
+        }
     }
 
     @Transactional(readOnly = true)
