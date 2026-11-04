@@ -36,9 +36,11 @@ public class Project {
 
     @Builder
     public Project(String projectTitle) {
-        this.projectTitle = StringUtils.hasText(projectTitle)
-                ? projectTitle
-                : "기본 프로젝트";
+        if (!StringUtils.hasText(projectTitle)) {
+            throw new IllegalArgumentException("프로젝트 제목은 비어 있을 수 없습니다.");
+        }
+
+        this.projectTitle = projectTitle;
     }
 
     public void rename(String projectTitle) {
