@@ -33,7 +33,11 @@ public class Player {
     }
 
     public void update(String name, String nickname) {
-        this.name = name;
-        this.nickname = nickname;
+        if (name != null) {
+            this.name = name;
+        }
+        if (nickname != null) {
+            this.nickname = nickname;
+        }
     }
 }
