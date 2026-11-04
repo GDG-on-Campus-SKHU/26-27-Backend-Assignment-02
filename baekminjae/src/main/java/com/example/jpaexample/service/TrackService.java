@@ -62,8 +62,7 @@ public class TrackService {
     public List<TrackResponseDto> getAllTrack(Long projectId) {
         Project project = projectService.getProjectOrThrow(projectId);
 
-        return trackRepository.findAll().stream()
-                .filter(track -> track.getProject().getId().equals(project.getId()))
+        return project.getTracks().stream()
                 .map(TrackResponseDto::from)
                 .toList();
     }
