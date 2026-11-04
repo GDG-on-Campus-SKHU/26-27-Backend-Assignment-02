@@ -30,19 +30,23 @@ public class User {
     @Column(nullable = false)
     private String name; // 이름
 
-    private int age; // 나이
+    private Integer age; // 나이
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true) // 유저 한 명이 여러 영화를 참조
     private List<Movie> movies = new ArrayList<>();
 
     @Builder
-    public User(String name, int age) {
+    public User(String name, Integer age) {
         this.name = name;
         this.age = age;
     }
 
-    public void update(String name, int age) {
-        this.name = name;
-        this.age = age;
+    public void update(String name, Integer age) {
+        if (name != null) {
+            this.name = name;
+        }
+        if (age != null) {
+            this.age = age;
+        }
     }
 }

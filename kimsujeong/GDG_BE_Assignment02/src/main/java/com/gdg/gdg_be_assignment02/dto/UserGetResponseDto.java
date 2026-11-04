@@ -9,7 +9,7 @@ import java.util.List;
 public record UserGetResponseDto( // 특정 유저와 해당 유저가 등록한 영화 목록 조회
         Long id,
         String name,
-        int age,
+        Integer age,
         List<MovieInfoResponseDto> movies
 ) {
     public static UserGetResponseDto from(User user) {
