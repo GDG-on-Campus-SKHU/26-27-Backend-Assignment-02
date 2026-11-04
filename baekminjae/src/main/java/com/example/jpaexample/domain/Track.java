@@ -39,10 +39,16 @@ public class Track {
 
     @Builder
     public Track(Project project) {
-        this.project = project;
         this.name = "track";
         this.gainDb = 0.0;
         this.muted = false;
+
+        assignProject(project);
+    }
+
+    private void assignProject(Project project) {
+        this.project = project;
+        project.getTracks().add(this);
     }
 
     public void update(String name, Double gainDb, Boolean muted) {
