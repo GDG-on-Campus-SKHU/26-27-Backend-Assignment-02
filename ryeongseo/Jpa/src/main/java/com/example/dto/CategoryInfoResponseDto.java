@@ -1,0 +1,19 @@
+package com.example.dto;
+
+
+import com.example.domain.Category;
+import lombok.Builder;
+
+@Builder
+public record CategoryInfoResponseDto(
+        Long id,
+        String categoryName
+) {
+
+    public static CategoryInfoResponseDto from(Category category) {
+        return CategoryInfoResponseDto.builder()
+                .id(category.getId())
+                .categoryName(category.getCategoryName())
+                .build();
+    }
+}
